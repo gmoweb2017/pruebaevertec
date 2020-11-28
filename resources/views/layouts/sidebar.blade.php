@@ -49,14 +49,14 @@
 						
 						<li class="nav-item">
 							<a data-toggle="collapse" href="#orders">
-								<i class="fas fa-list"></i>
+								<i class="fas fa-cart-arrow-down"></i>
 								<p>Ordenes</p>
 								<span class="caret"></span>
 							</a>
 							<div class="collapse" id="orders">
 								<ul class="nav nav-collapse">
 									<li>
-										<a href="#">
+										<a href="{{route('Order.index')}}">
 											<span class="sub-item">Listar</span>
 										</a>
 									</li>
@@ -68,6 +68,23 @@
 						
 						@if(Auth::user()->hasRole(['Super Admin']) || Auth::user()->hasRole(['Administrador']))						
 						<li class="nav-item">
+							<a data-toggle="collapse" href="#Productos">
+								<i class="fas fa-list"></i>
+								<p>Productos</p>
+								<span class="caret"></span>
+							</a>
+							<div class="collapse" id="Productos">
+								<ul class="nav nav-collapse">
+									<li>
+										<a href="{{route('Product.index')}}">
+											<span class="sub-item">Listar</span>
+										</a>
+									</li>
+								</ul>
+							</div>
+						</li>
+
+						<li class="nav-item">
 							<a data-toggle="collapse" href="#clientes">
 								<i class="fas fa-users"></i>
 								<p>Clientes</p>
@@ -76,7 +93,7 @@
 							<div class="collapse" id="clientes">
 								<ul class="nav nav-collapse">
 									<li>
-										<a href="#">
+										<a href="{{route('Customer.index')}}">
 											<span class="sub-item">Listar</span>
 										</a>
 									</li>

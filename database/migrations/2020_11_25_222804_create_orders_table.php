@@ -15,6 +15,7 @@ class CreateOrdersTable extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->string('order_code',20); 
             $table->bigInteger('customer_id')->unsigned()->index();;
             $table->foreign('customer_id')->references('id')->on('customers');
             $table->bigInteger('value_order');

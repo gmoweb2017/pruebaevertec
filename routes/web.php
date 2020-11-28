@@ -16,12 +16,21 @@ Route::get('/401', function () {
 
 
 Route::group(['middleware' => ['web']], function () {
-  Route::get('/','Auth\LoginController@showLoginForm');
+  Route::get('/login','Auth\LoginController@showLoginForm');
   Route::post('/login', 'Auth\LoginController@login')->name('login');
 
-  
-  //Route::get('/login', 'Auth\LoginController@login')->name('login');
+  Route::get('/',function () {
+    return view('front.index');
+  });
+
+
+  Route::prefix('ProductFront')->group(function(){        
+    Route::get('/listado', 'ProductController@indexFront');
+  });
+
 });
+
+
 
 Route::group(['middleware' => ['auth']], function () {
 
@@ -44,6 +53,29 @@ Route::group(['middleware' => ['auth']], function () {
         Route::put('/activar', 'UserController@activar');
       });
 
+      Route::prefix('Customer')->group(function(){        
+        Route::get('/', 'HomeController@customers')->name('Customer.index');
+        Route::get('/listado', 'CustomerController@index');
+        Route::post('/registrar', 'CustomerController@store');
+        Route::put('/actualizar', 'CustomerController@update');
+      });
+
+      Route::prefix('Product')->group(function(){        
+        Route::get('/', 'HomeController@products')->name('Product.index');
+        Route::get('/listado', 'ProductController@index');
+        Route::post('/registrar', 'ProductController@store');
+        Route::put('/actualizar', 'ProductController@update');
+        Route::put('/desactivar', 'ProductController@desactivar');
+        Route::put('/activar', 'ProductController@activar');
+      });
+
+
+      Route::prefix('Order')->group(function(){        
+        Route::get('/', 'HomeController@orders')->name('Order.index');
+        Route::get('/listado', 'OrderController@index');
+      });
+
+      
       Route::prefix('Modulo')->group(function(){        
         Route::get('/', 'HomeController@modulos')->name('Configuracion.modulo');
         Route::get('/listado', 'Configuraciones\ModuloController@index');

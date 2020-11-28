@@ -117,5 +117,60 @@ class HomeController extends Controller
 
     }
 
+    public function customers(Request $request){
+      $id = Auth::id();
+      $rol = Auth::user()->idrol;
+      $rolNo = Rol::where('id','=',$rol)->first();
+      //Revisa si el rol tiene permiso      
+      if(!$request->user()->authorizeRoles([$rolNo->rol_descripcion])){
+        return redirect()->route('401');
+      }      
+      //obtiene los permisos del rol en cuanto al modulo o pagina basado en una acción
+      $consultaPermiso=$request->user()->permisoArreglo($rol,4,'consultar');    
+      //Si la anterior responde true sigue sino devuelve            
+      if($consultaPermiso['accion']){        
+        return view('customers.index')->with('consultar',$consultaPermiso['permisos']);
+      }else{
+        return redirect()->route('401');
+      }
+    }
+
+
+    public function products(Request $request){
+      $id = Auth::id();
+      $rol = Auth::user()->idrol;
+      $rolNo = Rol::where('id','=',$rol)->first();
+      //Revisa si el rol tiene permiso      
+      if(!$request->user()->authorizeRoles([$rolNo->rol_descripcion])){
+        return redirect()->route('401');
+      }      
+      //obtiene los permisos del rol en cuanto al modulo o pagina basado en una acción
+      $consultaPermiso=$request->user()->permisoArreglo($rol,2,'consultar');    
+      //Si la anterior responde true sigue sino devuelve            
+      if($consultaPermiso['accion']){        
+        return view('products.index')->with('consultar',$consultaPermiso['permisos']);
+      }else{
+        return redirect()->route('401');
+      }
+    }
+
+    public function orders(Request $request){
+      $id = Auth::id();
+      $rol = Auth::user()->idrol;
+      $rolNo = Rol::where('id','=',$rol)->first();
+      //Revisa si el rol tiene permiso      
+      if(!$request->user()->authorizeRoles([$rolNo->rol_descripcion])){
+        return redirect()->route('401');
+      }      
+      //obtiene los permisos del rol en cuanto al modulo o pagina basado en una acción
+      $consultaPermiso=$request->user()->permisoArreglo($rol,3,'consultar');    
+      //Si la anterior responde true sigue sino devuelve            
+      if($consultaPermiso['accion']){        
+        return view('orders.index')->with('consultar',$consultaPermiso['permisos']);
+      }else{
+        return redirect()->route('401');
+      }
+    }
+
 
 }

@@ -15,21 +15,21 @@ window.Vue = require('vue');
  *
  * Eg. ./components/ExampleComponent.vue -> <example-component></example-component>
  */
- Vue.filter('capitalize', function(value) {
-     if (!value) return ''
-     value = value.toString()
-     return value.charAt(0).toUpperCase() + value.slice(1)
- })
+Vue.filter('capitalize', function(value) {
+  if (!value) return ''
+  value = value.toString()
+  return value.charAt(0).toUpperCase() + value.slice(1)
+})
 
- Vue.filter('truncate', function(text, length, suffix) {
-     return text.substring(0, length) + suffix;
- });
+Vue.filter('truncate', function(text, length, suffix) {
+  return text.substring(0, length) + suffix;
+});
 
- Vue.filter('redondeo', function(value) {
-     if (!value) return ''
-     value = value.toFixed(0)
-     return value
- })
+Vue.filter('redondeo', function(value) {
+  if (!value) return ''
+  value = value.toFixed(0)
+  return value
+})
 
 // const files = require.context('./', true, /\.vue$/i);
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default));
@@ -50,6 +50,20 @@ Vue.component('roles', require('./components/Usuarios/Roles/').default);
 Vue.component('configura', require('./components/Configuraciones/ConfiguraApp').default);
 Vue.component('modulo', require('./components/Configuraciones/Modulos').default);
 
+//Modulo de Customers
+Vue.component('customers', require('./components/Customers/').default);
+
+//Modulo de productos
+Vue.component('products', require('./components/Products/').default);
+
+
+//Modulo de ordenes
+Vue.component('orders', require('./components/OrdersAdmin/').default);
+
+//Modulo de listado de productos
+Vue.component('product-list', require('./components/cart/productList').default);
+
+
 
 
 /**
@@ -61,6 +75,6 @@ Vue.component('modulo', require('./components/Configuraciones/Modulos').default)
 const app = new Vue({
   el: '#app',
   data: {
-      menu: 0
+    menu: 0
   }
 });
